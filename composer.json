@@ -1,7 +1,6 @@
 {
     "name": "tamce/slim-module",
     "type": "library",
-    "version": "1.0",
     "authors": [
         {
             "name": "Tamce",

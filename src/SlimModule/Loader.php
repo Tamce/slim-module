@@ -22,7 +22,7 @@ class Loader
      * @throws \Exception
      * @return $this
      */
-    public function add($class, array $conf = [], $name = null)
+    public function load($class, array $conf = [], $name = null)
     {
         if (!class_exists($class)) {
             if (class_exists($class.'\\Loader')) {
@@ -57,5 +57,20 @@ class Loader
             $c->setup();
         }
         return $this;
+    }
+
+    /**
+     * Determines that if a given class name has been loaded.
+     * 
+     * @param $class        Class name to be check
+     * @return bool
+     */
+    public function isLoaded($class)
+    {
+        foreach ($this->loaded as $key => $value) {
+            if ($value instanceof $class)
+                return true;
+        }
+        return false;
     }
 }

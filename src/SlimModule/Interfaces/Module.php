@@ -1,5 +1,5 @@
 <?php
-namespace Tamce\SlimModule;
+namespace Tamce\SlimModule\Interfaces;
 
 use Slim\App;
 
