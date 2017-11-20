@@ -7,10 +7,18 @@ class Loader
 {
     protected $app;
     protected $loaded = [];
+    protected $prefix;
 
-    public function __construct(\Slim\App $app)
+    /**
+     * Initialize a module loader
+     *
+     * @param \Slim\App $app    The instance of slim app
+     * @param string $prefix    The prefix of each module class
+     */
+    public function __construct(\Slim\App $app, $prefix = '')
     {
         $this->app = $app;
+        $this->prefix = $prefix;
     }
 
     /**
@@ -24,6 +32,7 @@ class Loader
      */
     public function load($class, array $conf = [], $name = null)
     {
+        $class = $prefix.$class;
         if (!class_exists($class)) {
             if (class_exists($class.'\\Loader')) {
                 $class = $class.'\\Loader';
