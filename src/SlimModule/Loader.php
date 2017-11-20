@@ -30,9 +30,9 @@ class Loader
      * @throws \Exception
      * @return $this
      */
-    public function load($class, array $conf = [], $name = null)
+    public function load($class, $conf = [], $name = null)
     {
-        $class = $prefix.$class;
+        $class = $this->prefix.$class;
         if (!class_exists($class)) {
             if (class_exists($class.'\\Loader')) {
                 $class = $class.'\\Loader';

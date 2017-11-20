@@ -9,6 +9,12 @@ trait ProvideRoutes
      * @param array $conf       The array should has two keys:\
      *                          `prefix` (default is `''`) and `routes` (default is `[]`)\
      *                          each `routes` should look like this: '/users' => ['GET', SlimRouteable]
+     *                          [
+     *                              'prefix' => '',
+     *                              'routes' => [
+     *                                  '/users' => ['GET', function () { return 'Hello'; }]
+     *                              ]
+     *                          ]
      * @return $this
      */
     public function loadRoutes(array $conf)

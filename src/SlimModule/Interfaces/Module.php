@@ -23,7 +23,7 @@ interface Module
      * @param array     $config Extra config passed when load a module.
      * @return void
      */
-    public function load(App $app, array $config);
+    public function load(App $app, $config);
 
     /**
      * Return the \Slim\App instance attached to this module.
