@@ -25,9 +25,9 @@ trait ProvideRoutes
             $conf['routes'] = [];
 
         $this->getApp()->group($conf['prefix'], function () use ($conf) {
-            foreach ($conf['routes'] as $uri => $r) {
-                $r[0] = is_array($r[0]) ? $r[0] : [$r[0]];
-                $this->map($r[0], $uri, $r[1]);
+            foreach ($conf['routes'] as $r) {
+                $r[1] = is_array($r[1]) ? $r[1] : [$r[1]];
+                $this->map($r[1], $r[0], $r[2]);
             }
         });
         return $this;
