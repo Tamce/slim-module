@@ -32,14 +32,14 @@ class Loader
      */
     public function load($class, $conf = [], $name = null)
     {
+        if (empty($name))
+            $name = $class;
         $class = $this->prefix.$class;
         if (!class_exists($class)) {
             if (class_exists($class.'\\Loader')) {
                 $class = $class.'\\Loader';
             }
         }
-        if (empty($name))
-            $name = $class;
 
         $class = new $class;
         if (!($class instanceof IModule)) {
@@ -57,13 +57,25 @@ class Loader
     /**
      * Run setup command on each loaded module.
      *
+     * @param mixed name
      * @throws \Exception
      * @return $this
      */
-    public function setup()
+    public function setup($name = null)
     {
-        foreach ($this->loaded as $c) {
-            $c->setup();
+        if (is_array($name)) {
+            foreach ($name as $i) {
+                $this->setup($i);
+            }
+        }
+        if (empty($name)) {
+            foreach ($this->loaded as $c) {
+                $c->setup();
+            }
+        } else {
+            if (empty($this->loaded[$name]))
+                throw new \Exception('Name '.$name.' do not satisfy any class loaded!');
+            $this->loaded[$name]->setup();
         }
         return $this;
     }
@@ -81,5 +93,15 @@ class Loader
                 return true;
         }
         return false;
+    }
+
+    /**
+     * Returns the loaded classes' name.
+     * 
+     * @return array    The names of loaded classes
+     */
+    public function loaded()
+    {
+        return array_keys($this->loaded);
     }
 }
