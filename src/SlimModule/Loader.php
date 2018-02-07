@@ -67,8 +67,7 @@ class Loader
             foreach ($name as $i) {
                 $this->setup($i);
             }
-        }
-        if (empty($name)) {
+        } else if (empty($name)) {
             foreach ($this->loaded as $c) {
                 $c->setup();
             }
